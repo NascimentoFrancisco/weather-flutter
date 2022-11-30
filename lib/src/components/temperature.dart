@@ -19,7 +19,7 @@ class Temperature extends StatelessWidget {
           child: Row(
             children: [
               Icon(Icons.thermostat,color: Color.fromARGB(255, 56, 152, 231),),
-              Text('Temp max e min',
+              Text(' Temp max e min',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16

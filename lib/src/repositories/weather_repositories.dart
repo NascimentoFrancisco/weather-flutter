@@ -1,8 +1,9 @@
 
 import 'dart:convert';
 import 'dart:ffi';
-
 import 'package:http/http.dart' as http;
+
+/* Buscas, instanciações de classes e retornos para o front */
 
 Future searchWeatherData (String city) async{
 

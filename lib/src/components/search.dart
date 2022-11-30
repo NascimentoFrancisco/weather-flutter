@@ -29,8 +29,6 @@ class _SearchState extends State<Search> {
         labelText: 'Cidade',
         focusedBorder: OutlineInputBorder(
           borderSide: const BorderSide(
-            /* color: Colors.white, 
-            width: 3.0 */
           ),
         ),
         labelStyle: TextStyle(color: Colors.white),

@@ -25,7 +25,7 @@ class _HumidityState extends State<Humidity> {
           child: Row(
             children: [
               Icon(Icons.water_drop_rounded, color: Color.fromARGB(255, 56, 152, 231),),
-              Text('Umidade max e min',
+              Text(' Umidade max e min',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16

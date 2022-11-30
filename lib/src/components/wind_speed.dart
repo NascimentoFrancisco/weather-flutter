@@ -19,7 +19,7 @@ class windSpeed extends StatelessWidget {
           child: Row(
             children: [
               Icon(Icons.speed,color: Color.fromARGB(255, 56, 152, 231),),
-              Text('Velocidade vento max e min',
+              Text(' Velocidade vento max e min',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16
