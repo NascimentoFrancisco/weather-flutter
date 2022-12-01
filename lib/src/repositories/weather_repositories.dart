@@ -17,15 +17,8 @@ Future searchWeatherData (String city) async{
   if (response.statusCode == 200){
     
     var data = jsonDecode(response.body);
-    print(data);
-    print(data['weather'][0]['description']);
-    print(data['main']['temp']);
-    print(data['main']['temp_max']);
-    print(data['main']['temp_min']);
-    print(data['wind']['speed']);
-    print(data['name']);
-
-             
+                 
   }
+  
   print(response.statusCode);
 }

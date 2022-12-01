@@ -2,11 +2,15 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:weather_forecast/src/models/weather_model.dart';
+import 'package:weather_forecast/src/pages/home_page.dart';
+import 'package:weather_forecast/src/stores/weather.stores.dart';
 
 import '../repositories/weather_repositories.dart';
 
 class Search extends StatefulWidget {
-  const Search({super.key});
+  Search({super.key, weatherStore? weatherstore});
 
   @override
   State<Search> createState() => _SearchState();
@@ -34,16 +38,25 @@ class _SearchState extends State<Search> {
         labelStyle: TextStyle(color: Colors.white),
         suffixIcon: Padding(
           padding: EdgeInsets.all(2),
-          child: GestureDetector(
-            onTap: () {
-              print("Clicado");
-              /* searchWeatherData(_cityController.text); */
+          child: Observer(
+            builder: (_){
+              return GestureDetector(
+                onTap: 
+                  Weatherstore.isValidSearching 
+                  ? null : (){
+                      Weatherstore.setCity(_cityController.text);
+                    },
+                child: Weatherstore.isValidSearching 
+                  ?CircularProgressIndicator(
+                    color: Colors.white,
+                  )
+                  :Icon(
+                  Icons.search,
+                  color: Colors.white,
+                  size: 26,
+                ),
+              );
             },
-            child: Icon(
-              Icons.search,
-              color: Colors.white,
-              size: 26,
-            ),
           ),
         )
       ),

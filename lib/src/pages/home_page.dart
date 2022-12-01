@@ -6,6 +6,10 @@ import 'package:weather_forecast/src/components/humidity.dart';
 import 'package:weather_forecast/src/components/search.dart';
 import 'package:weather_forecast/src/components/temperature.dart';
 import 'package:weather_forecast/src/components/wind_speed.dart';
+import 'package:weather_forecast/src/models/weather_model.dart';
+import 'package:weather_forecast/src/stores/weather.stores.dart';
+
+final Weatherstore = weatherStore();
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -92,7 +96,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 40,),
-                  Search(),
+                  Search(weatherstore: Weatherstore),
                   SizedBox(height: 40,),
                   Temperature(),
                   SizedBox(height: 20,),
