@@ -22,10 +22,10 @@ class Weather{
   Weather.fromJson(Map<String, dynamic> json)
    :city = json['name'],
     clouds = json['weather'][0]['description'],
-    humidity = json['main']['humidity'],
-    temperature = json['main']['temp'],
-    temp_max = json['main']['temp_max'],
-    temp_min = json['main']['temp_min'],
-    wind_speed = json['wind']['speed'];    
-    
+    humidity = json['main']['humidity'].toString(),
+    temperature = json['main']['temp'].toString().replaceAll('.',','),
+    temp_max = json['main']['temp_max'].toString().replaceAll('.',','),
+    temp_min = json['main']['temp_min'].toString().replaceAll('.',','),
+    wind_speed = (json['wind']['speed'] * 3.6).toStringAsFixed(2).replaceAll('.',',');    
+  
 }

@@ -1,9 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:weather_forecast/src/pages/home_page.dart';
+
+import '../stores/weather.stores.dart';
+import 'package:weather_forecast/src/stores/weather.stores.dart';
 
 class Temperature extends StatelessWidget {
-  const Temperature({super.key});
+  Temperature({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,12 +24,18 @@ class Temperature extends StatelessWidget {
           child: Row(
             children: [
               Icon(Icons.thermostat,color: Color.fromARGB(255, 56, 152, 231),),
-              Text(' Temp max e min',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16
-                ),
-              )
+              /* Weatherstore.isValidSearching 
+                  ? */
+              Observer(
+                builder: (_){
+                  return Text('Máxima de ${Weatherstore.getWeather?.temp_max}°C e mínima de ${Weatherstore.getWeather?.temp_min}°C',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16
+                    ),
+                  );
+                }
+              ),
             ],
           ),
         ),

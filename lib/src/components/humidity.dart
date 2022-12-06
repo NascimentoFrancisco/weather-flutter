@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:weather_forecast/src/pages/home_page.dart';
 
 class Humidity extends StatefulWidget {
   const Humidity({super.key});
@@ -25,12 +27,24 @@ class _HumidityState extends State<Humidity> {
           child: Row(
             children: [
               Icon(Icons.water_drop_rounded, color: Color.fromARGB(255, 56, 152, 231),),
-              Text(' Umidade max e min',
+              Observer(
+                builder: (_){
+                  return 
+                    Text('Umidade ${Weatherstore.getWeather?.humidity}%',
+                      style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16
+                    )
+                  ); 
+                }
+              ),
+              /* Icon(Icons.water_drop_rounded, color: Color.fromARGB(255, 56, 152, 231),),
+              Text('Umidade ${Weatherstore.getWeather?.humidity}',
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 16
                 )
-              )
+              ) */
             ],
           ),
         ),

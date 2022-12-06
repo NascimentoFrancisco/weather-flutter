@@ -23,6 +23,13 @@ mixin _$weatherStore on _weatherStore, Store {
           () => super.isValidSearching,
           name: '_weatherStore.isValidSearching'))
       .value;
+  Computed<Weather?>? _$getWeatherComputed;
+
+  @override
+  Weather? get getWeather =>
+      (_$getWeatherComputed ??= Computed<Weather?>(() => super.getWeather,
+              name: '_weatherStore.getWeather'))
+          .value;
 
   late final _$cityAtom = Atom(name: '_weatherStore.city', context: context);
 
@@ -55,6 +62,46 @@ mixin _$weatherStore on _weatherStore, Store {
     });
   }
 
+  late final _$instanciConfirmAtom =
+      Atom(name: '_weatherStore.instanciConfirm', context: context);
+
+  @override
+  bool get instanciConfirm {
+    _$instanciConfirmAtom.reportRead();
+    return super.instanciConfirm;
+  }
+
+  @override
+  set instanciConfirm(bool value) {
+    _$instanciConfirmAtom.reportWrite(value, super.instanciConfirm, () {
+      super.instanciConfirm = value;
+    });
+  }
+
+  late final _$weatherAtom =
+      Atom(name: '_weatherStore.weather', context: context);
+
+  @override
+  Weather? get weather {
+    _$weatherAtom.reportRead();
+    return super.weather;
+  }
+
+  @override
+  set weather(Weather? value) {
+    _$weatherAtom.reportWrite(value, super.weather, () {
+      super.weather = value;
+    });
+  }
+
+  late final _$setWeatherAsyncAction =
+      AsyncAction('_weatherStore.setWeather', context: context);
+
+  @override
+  Future<void> setWeather() {
+    return _$setWeatherAsyncAction.run(() => super.setWeather());
+  }
+
   late final _$_weatherStoreActionController =
       ActionController(name: '_weatherStore', context: context);
 
@@ -81,12 +128,26 @@ mixin _$weatherStore on _weatherStore, Store {
   }
 
   @override
+  void setinstanciConfirm() {
+    final _$actionInfo = _$_weatherStoreActionController.startAction(
+        name: '_weatherStore.setinstanciConfirm');
+    try {
+      return super.setinstanciConfirm();
+    } finally {
+      _$_weatherStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 city: ${city},
 searching: ${searching},
+instanciConfirm: ${instanciConfirm},
+weather: ${weather},
 isValidCity: ${isValidCity},
-isValidSearching: ${isValidSearching}
+isValidSearching: ${isValidSearching},
+getWeather: ${getWeather}
     ''';
   }
 }

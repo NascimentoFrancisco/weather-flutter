@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
+import 'package:weather_forecast/src/pages/home_page.dart';
 
 class windSpeed extends StatelessWidget {
   const windSpeed({super.key});
@@ -19,12 +21,16 @@ class windSpeed extends StatelessWidget {
           child: Row(
             children: [
               Icon(Icons.speed,color: Color.fromARGB(255, 56, 152, 231),),
-              Text(' Velocidade vento max e min',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16
-                )
-              )
+              Observer(
+                builder: (_){
+                  return Text('Vento ${Weatherstore.getWeather?.wind_speed} km/h',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16
+                    )
+                  ); 
+                }
+              ),
             ],
           ),
         ),

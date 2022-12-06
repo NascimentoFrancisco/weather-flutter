@@ -7,10 +7,9 @@ import 'package:weather_forecast/src/models/weather_model.dart';
 import 'package:weather_forecast/src/pages/home_page.dart';
 import 'package:weather_forecast/src/stores/weather.stores.dart';
 
-import '../repositories/weather_repositories.dart';
 
 class Search extends StatefulWidget {
-  Search({super.key, weatherStore? weatherstore});
+  Search({super.key});
 
   @override
   State<Search> createState() => _SearchState();
@@ -23,6 +22,7 @@ class _SearchState extends State<Search> {
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: TextInputType.text,
       controller: _cityController,
       cursorColor: Colors.white,
       style: TextStyle(color: Colors.white),
@@ -43,8 +43,9 @@ class _SearchState extends State<Search> {
               return GestureDetector(
                 onTap: 
                   Weatherstore.isValidSearching 
-                  ? null : (){
+                  ? null : ()async{
                       Weatherstore.setCity(_cityController.text);
+                      await Weatherstore.setWeather();
                     },
                 child: Weatherstore.isValidSearching 
                   ?CircularProgressIndicator(

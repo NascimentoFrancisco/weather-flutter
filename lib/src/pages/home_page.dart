@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
+import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:weather_forecast/src/components/humidity.dart';
 import 'package:weather_forecast/src/components/search.dart';
 import 'package:weather_forecast/src/components/temperature.dart';
@@ -44,11 +45,15 @@ class HomePage extends StatelessWidget {
                         child: Column(
                           children: [
                             SizedBox(height: 25,),
-                            Text('São Raimundo das Mangabeiras',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 20
-                              ),
+                            Observer(
+                              builder: (_){
+                                return Text('${Weatherstore.getWeather?.city}',
+                                  style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 20
+                                  ),
+                                );
+                              }
                             ),
                             SizedBox(height: 40,),
                             Center(
@@ -62,9 +67,16 @@ class HomePage extends StatelessWidget {
                                 child: Row(
                                   children: [
                                     Icon(Icons.thermostat,color: Color.fromARGB(255, 56, 152, 231),),
-                                    Text('Temperatura',
+                                    Observer(
+                                      builder: (_){
+                                        return Text('${Weatherstore.getWeather?.temperature} °C',
+                                          style: TextStyle(color: Colors.white, fontSize: 16),
+                                        ); 
+                                      }
+                                    )
+                                    /* Text('${Weatherstore.getWeather?.temperature} °C',
                                       style: TextStyle(color: Colors.white, fontSize: 16),
-                                    ),
+                                    ), */
                                   ],
                                 ),
                               ),
@@ -83,8 +95,12 @@ class HomePage extends StatelessWidget {
                                   children: [
                                     Icon(Icons.sunny, color: Colors.yellowAccent,),
                                     SizedBox(width: 4,),
-                                    Text('Status nuvens',
-                                      style: TextStyle(color: Colors.white, fontSize: 16),
+                                    Observer(
+                                      builder: (_) {
+                                        return Text('${Weatherstore.getWeather?.clouds}',
+                                          style: TextStyle(color: Colors.white, fontSize: 16),
+                                        );
+                                      }
                                     ),
                                   ],
                                 ),
@@ -96,7 +112,7 @@ class HomePage extends StatelessWidget {
                     ),
                   ),
                   SizedBox(height: 40,),
-                  Search(weatherstore: Weatherstore),
+                  Search(),
                   SizedBox(height: 40,),
                   Temperature(),
                   SizedBox(height: 20,),
