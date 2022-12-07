@@ -26,6 +26,9 @@ abstract class _weatherStore with Store{
   @observable
   Weather? weather;
 
+  @observable
+  String? errormessage;
+
   @action //Seta a cidade
   void setCity(String value){
     setSearching();
@@ -48,13 +51,22 @@ abstract class _weatherStore with Store{
     instanciConfirm = !instanciConfirm;
   }
 
+  @action
+  void setErrormessage(String value){
+    errormessage = value;
+  }
+
+  @computed
+  String? get getErrormessage => errormessage;
+
+
   /* Metodos relacionados a classe weather */
 
   @action
   Future<void> setWeather() async{
 
     var response;
-    const String key = "your key";
+    const String key = "8f127d9459f88818e376ec3e1e8a5144";
     String url = "https://api.openweathermap.org/data/2.5/weather?q=${city},BR&appid=${key}&units=metric&lang=pt_br";
     
     if (isValidCity){
@@ -65,22 +77,26 @@ abstract class _weatherStore with Store{
           weather = Weather.fromJson(jsonDecode(response.body));
           setSearching();
           setinstanciConfirm();
+          errormessage = null;
         } else if (response.statusCode == 404){
-          print('Cidade não encotrada');
+          setErrormessage('Cidade não encotrada.');
           setSearching();
-        }/* Tratamentos dos demais erros*/
+        }
 
       } on ClientException{
-        print('Erro de conexão');
+        setErrormessage('Erro de conexão.');
         setSearching();
       } on SocketException{
-        print('Erro de conexão');
+        setErrormessage('Erro de conexão.');
         setSearching();
       } on NoSuchMethodError{
-        print('Erro de conexão');
+        setErrormessage('Erro de conexão.');
         setSearching();
       }
       
+    }else{
+      setErrormessage('Informe uma cidade no formulário de pesquisa.');
+      setSearching();
     }
   }
 

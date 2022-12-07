@@ -23,6 +23,13 @@ mixin _$weatherStore on _weatherStore, Store {
           () => super.isValidSearching,
           name: '_weatherStore.isValidSearching'))
       .value;
+  Computed<String?>? _$getErrormessageComputed;
+
+  @override
+  String? get getErrormessage => (_$getErrormessageComputed ??=
+          Computed<String?>(() => super.getErrormessage,
+              name: '_weatherStore.getErrormessage'))
+      .value;
   Computed<Weather?>? _$getWeatherComputed;
 
   @override
@@ -94,6 +101,22 @@ mixin _$weatherStore on _weatherStore, Store {
     });
   }
 
+  late final _$errormessageAtom =
+      Atom(name: '_weatherStore.errormessage', context: context);
+
+  @override
+  String? get errormessage {
+    _$errormessageAtom.reportRead();
+    return super.errormessage;
+  }
+
+  @override
+  set errormessage(String? value) {
+    _$errormessageAtom.reportWrite(value, super.errormessage, () {
+      super.errormessage = value;
+    });
+  }
+
   late final _$setWeatherAsyncAction =
       AsyncAction('_weatherStore.setWeather', context: context);
 
@@ -139,14 +162,27 @@ mixin _$weatherStore on _weatherStore, Store {
   }
 
   @override
+  void setErrormessage(String value) {
+    final _$actionInfo = _$_weatherStoreActionController.startAction(
+        name: '_weatherStore.setErrormessage');
+    try {
+      return super.setErrormessage(value);
+    } finally {
+      _$_weatherStoreActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
   String toString() {
     return '''
 city: ${city},
 searching: ${searching},
 instanciConfirm: ${instanciConfirm},
 weather: ${weather},
+errormessage: ${errormessage},
 isValidCity: ${isValidCity},
 isValidSearching: ${isValidSearching},
+getErrormessage: ${getErrormessage},
 getWeather: ${getWeather}
     ''';
   }

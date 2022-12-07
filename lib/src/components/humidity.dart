@@ -30,7 +30,9 @@ class _HumidityState extends State<Humidity> {
               Observer(
                 builder: (_){
                   return 
-                    Text('Umidade ${Weatherstore.getWeather?.humidity}%',
+                    Text(Weatherstore.getWeather?.humidity != null
+                    ?'Umidade ${Weatherstore.getWeather?.humidity}%'
+                    :'Sem dados',
                       style: TextStyle(
                       color: Colors.white,
                       fontSize: 16
@@ -38,13 +40,6 @@ class _HumidityState extends State<Humidity> {
                   ); 
                 }
               ),
-              /* Icon(Icons.water_drop_rounded, color: Color.fromARGB(255, 56, 152, 231),),
-              Text('Umidade ${Weatherstore.getWeather?.humidity}',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16
-                )
-              ) */
             ],
           ),
         ),

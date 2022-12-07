@@ -23,7 +23,9 @@ class windSpeed extends StatelessWidget {
               Icon(Icons.speed,color: Color.fromARGB(255, 56, 152, 231),),
               Observer(
                 builder: (_){
-                  return Text('Vento ${Weatherstore.getWeather?.wind_speed} km/h',
+                  return Text(Weatherstore.getWeather?.wind_speed != null?
+                  'Vento ${Weatherstore.getWeather?.wind_speed} km/h'
+                  :'Sem dados',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16

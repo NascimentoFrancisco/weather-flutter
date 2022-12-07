@@ -28,7 +28,9 @@ class Temperature extends StatelessWidget {
                   ? */
               Observer(
                 builder: (_){
-                  return Text('Máxima de ${Weatherstore.getWeather?.temp_max}°C e mínima de ${Weatherstore.getWeather?.temp_min}°C',
+                  return Text(Weatherstore.getWeather?.temp_max != null?
+                    'Máxima de ${Weatherstore.getWeather?.temp_max}°C e mínima de ${Weatherstore.getWeather?.temp_min}°C'
+                    :'Sem dados',
                     style: TextStyle(
                       color: Colors.white,
                       fontSize: 16

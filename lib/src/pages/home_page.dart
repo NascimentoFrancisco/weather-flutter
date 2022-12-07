@@ -47,7 +47,8 @@ class HomePage extends StatelessWidget {
                             SizedBox(height: 25,),
                             Observer(
                               builder: (_){
-                                return Text('${Weatherstore.getWeather?.city}',
+                                return Text(Weatherstore.getWeather?.city != null?'${Weatherstore.getWeather?.city}'
+                                :'Pesquise por uma cidade',
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontSize: 20
@@ -69,14 +70,12 @@ class HomePage extends StatelessWidget {
                                     Icon(Icons.thermostat,color: Color.fromARGB(255, 56, 152, 231),),
                                     Observer(
                                       builder: (_){
-                                        return Text('${Weatherstore.getWeather?.temperature} °C',
+                                        return Text(Weatherstore.getWeather?.temperature != null?'${Weatherstore.getWeather?.temperature} °C'
+                                          :'Sem dados',
                                           style: TextStyle(color: Colors.white, fontSize: 16),
                                         ); 
                                       }
                                     )
-                                    /* Text('${Weatherstore.getWeather?.temperature} °C',
-                                      style: TextStyle(color: Colors.white, fontSize: 16),
-                                    ), */
                                   ],
                                 ),
                               ),
@@ -93,11 +92,12 @@ class HomePage extends StatelessWidget {
                                 padding: const EdgeInsets.all(4.0),
                                 child: Row(
                                   children: [
-                                    Icon(Icons.sunny, color: Colors.yellowAccent,),
+                                    Icon(Icons.sunny_snowing, color: Colors.yellowAccent,),
                                     SizedBox(width: 4,),
                                     Observer(
                                       builder: (_) {
-                                        return Text('${Weatherstore.getWeather?.clouds}',
+                                        return Text(Weatherstore.getWeather?.clouds != null?'${Weatherstore.getWeather?.clouds}'
+                                          :'Sem dados',
                                           style: TextStyle(color: Colors.white, fontSize: 16),
                                         );
                                       }

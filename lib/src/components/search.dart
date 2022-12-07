@@ -44,8 +44,10 @@ class _SearchState extends State<Search> {
                 onTap: 
                   Weatherstore.isValidSearching 
                   ? null : ()async{
+                      FocusScope.of(context).requestFocus(new FocusNode());
                       Weatherstore.setCity(_cityController.text);
                       await Weatherstore.setWeather();
+                      Weatherstore.getErrormessage != null ? ScaffoldMessenger.of(context).showSnackBar(snackBar):null;
                     },
                 child: Weatherstore.isValidSearching 
                   ?CircularProgressIndicator(
@@ -63,4 +65,16 @@ class _SearchState extends State<Search> {
       ),
     );
   }
+
+  var snackBar = SnackBar(
+    content: Observer(builder: (_) => Text('${Weatherstore.getErrormessage}',
+      style: TextStyle(color: Colors.white),
+    ),),
+    backgroundColor: Colors.redAccent,
+    action: SnackBarAction(
+      label: 'Fechar',
+      textColor: Colors.black,
+      onPressed: (){},
+      ),
+  );
 }
