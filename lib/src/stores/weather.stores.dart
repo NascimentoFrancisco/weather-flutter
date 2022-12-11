@@ -1,6 +1,7 @@
 
+// ignore_for_file: camel_case_types, library_private_types_in_public_api
+
 import 'dart:convert';
-import 'dart:ffi';
 import 'dart:io';
 import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
@@ -65,9 +66,9 @@ abstract class _weatherStore with Store{
   @action
   Future<void> setWeather() async{
 
-    var response;
+    http.Response response;
     const String key = "8f127d9459f88818e376ec3e1e8a5144";
-    String url = "https://api.openweathermap.org/data/2.5/weather?q=${city},BR&appid=${key}&units=metric&lang=pt_br";
+    String url = "https://api.openweathermap.org/data/2.5/weather?q=$city,BR&appid=$key&units=metric&lang=pt_br";
     
     if (isValidCity){
       try{

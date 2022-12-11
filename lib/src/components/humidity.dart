@@ -1,7 +1,5 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:weather_forecast/src/pages/home_page.dart';
 
@@ -20,20 +18,20 @@ class _HumidityState extends State<Humidity> {
         height: 40,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(6),
-          color: Color.fromARGB(166, 6, 10, 39)/* Color.fromARGB(255, 7, 96, 168) */
+          color: const Color.fromARGB(166, 6, 10, 39)/* Color.fromARGB(255, 7, 96, 168) */
         ),
         child: Padding(
-          padding: EdgeInsets.all(4),
+          padding: const EdgeInsets.all(4),
           child: Row(
             children: [
-              Icon(Icons.water_drop_rounded, color: Color.fromARGB(255, 56, 152, 231),),
+              const Icon(Icons.water_drop_rounded, color: Color.fromARGB(255, 56, 152, 231),),
               Observer(
                 builder: (_){
                   return 
                     Text(Weatherstore.getWeather?.humidity != null
                     ?'Umidade ${Weatherstore.getWeather?.humidity}%'
                     :'Sem dados',
-                      style: TextStyle(
+                      style: const TextStyle(
                       color: Colors.white,
                       fontSize: 16
                     )

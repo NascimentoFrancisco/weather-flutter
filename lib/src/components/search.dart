@@ -1,15 +1,11 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_mobx/flutter_mobx.dart';
-import 'package:weather_forecast/src/models/weather_model.dart';
 import 'package:weather_forecast/src/pages/home_page.dart';
-import 'package:weather_forecast/src/stores/weather.stores.dart';
 
 
 class Search extends StatefulWidget {
-  Search({super.key});
+  const Search({super.key});
 
   @override
   State<Search> createState() => _SearchState();
@@ -17,6 +13,7 @@ class Search extends StatefulWidget {
 
 class _SearchState extends State<Search> {
 
+  // ignore: prefer_final_fields
   TextEditingController _cityController = TextEditingController();
 
   @override
@@ -25,35 +22,36 @@ class _SearchState extends State<Search> {
       keyboardType: TextInputType.text,
       controller: _cityController,
       cursorColor: Colors.white,
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
       decoration: InputDecoration(
         filled: true,
-        fillColor: Color.fromARGB(108, 98, 100, 117)/* Color.fromARGB(87, 24, 43, 124) */,
-        border: OutlineInputBorder(),
+        fillColor: const  Color.fromARGB(108, 98, 100, 117)/* Color.fromARGB(87, 24, 43, 124) */,
+        border: const OutlineInputBorder(),
         labelText: 'Cidade',
-        focusedBorder: OutlineInputBorder(
-          borderSide: const BorderSide(
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(
           ),
         ),
-        labelStyle: TextStyle(color: Colors.white),
+        labelStyle: const TextStyle(color: Colors.white),
         suffixIcon: Padding(
-          padding: EdgeInsets.all(2),
+          padding: const EdgeInsets.all(2),
           child: Observer(
             builder: (_){
               return GestureDetector(
                 onTap: 
                   Weatherstore.isValidSearching 
                   ? null : ()async{
-                      FocusScope.of(context).requestFocus(new FocusNode());
+                      FocusScope.of(context).requestFocus(FocusNode());
                       Weatherstore.setCity(_cityController.text);
                       await Weatherstore.setWeather();
+                      // ignore: use_build_context_synchronously
                       Weatherstore.getErrormessage != null ? ScaffoldMessenger.of(context).showSnackBar(snackBar):null;
                     },
                 child: Weatherstore.isValidSearching 
-                  ?CircularProgressIndicator(
+                  ?const CircularProgressIndicator(
                     color: Colors.white,
                   )
-                  :Icon(
+                  :const Icon(
                   Icons.search,
                   color: Colors.white,
                   size: 26,
@@ -68,7 +66,7 @@ class _SearchState extends State<Search> {
 
   var snackBar = SnackBar(
     content: Observer(builder: (_) => Text('${Weatherstore.getErrormessage}',
-      style: TextStyle(color: Colors.white),
+      style: const TextStyle(color: Colors.white),
     ),),
     backgroundColor: Colors.redAccent,
     action: SnackBarAction(
